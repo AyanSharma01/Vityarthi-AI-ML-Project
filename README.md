@@ -1,133 +1,192 @@
-# Vityarthi AI/ML Project
+Vityarthi AI/ML Project
 
-## Intelligent Route Optimization System
+Intelligent Route Optimization System
 
-**GitHub Repository:** https://github.com/AyanSharma01/Vityarthi-AI-ML-Project
+GitHub Repository: https://github.com/AyanSharma01/Vityarthi-AI-ML-Project
 
+An AI-based route optimization system that uses Python and Prolog to find efficient paths between locations in a simulated university-campus network while considering dynamic blocked and restricted locations.
 
-An AI-based route optimization system that uses Python and Prolog to find efficient paths between locations while considering dynamic constraints.
+Project note: The campus map and route distances used by this academic project are simulated representations created for demonstration. They are not intended to represent an official VIT Bhopal navigation system.
 
-## Project Overview
+Project Overview
 
-This project demonstrates how Python and Prolog can be combined to solve a route-planning problem using symbolic knowledge representation, logical reasoning, search, and constraint handling.
+This project demonstrates how Python and Prolog can be combined to solve a route-planning problem using symbolic knowledge representation, logical reasoning, recursive search, distance calculation, and constraint handling.
 
-The Python program provides the command-line interface, while the Prolog knowledge base stores the environment and performs route reasoning.
+The Python program provides the command-line interface and application control, while the Prolog knowledge base stores the route network and performs the logical path search.
 
-## AI Concepts Used
+AI Concepts Used
 
-### 1. Knowledge Representation
+1. Knowledge Representation
 
-The environment is represented using logical facts and rules in Prolog. Locations and connections are stored in the knowledge base so that the system can reason about possible routes.
+Locations, connections, distances, and route rules are represented using Prolog facts and rules.
 
-### 2. Search
+2. Search
 
-The system searches through possible paths between a starting point and a destination and obtains a route from the Prolog knowledge base.
+The Prolog search explores possible simple paths between a starting location and destination while tracking visited locations.
 
-### 3. Constraint Handling
+3. Constraint Handling
 
-Temporary constraints can be supplied during execution. Locations marked as blocked or restricted are passed to the Prolog system before route calculation.
+Locations can be supplied at runtime as blocked or restricted. These locations are excluded from valid route calculations.
 
-### 4. Decision Making
+4. Decision Making
 
-The route returned by the knowledge base is evaluated using the project's route-search logic, allowing the system to select a route together with its calculated distance.
+The system compares valid candidate paths using their accumulated distance and returns the shortest available route.
 
-## System Architecture
+Main Features
 
-```text
-                 User Input
-                     |
-                     v
-              Python Application
-                     |
-                     v
-             PySwip Interface
-                     |
-                     v
-              Prolog Knowledge
-                  Base
-                     |
-                     v
-              Route Calculation
-                     |
-                     v
-             Path + Distance
-```
+Route optimization between two campus locations.
 
-## Main Components
+Knowledge-based representation using Prolog.
 
-### `route_optimizer.py`
+Bidirectional route traversal.
+
+Distance-aware path selection.
+
+Dynamic blocked-location handling.
+
+Dynamic restricted-location handling.
+
+Clear command-line output.
+
+No-route handling when the requested destination is unavailable.
+
+System Architecture
+
+User Input
+    |
+    v
+Python Command-Line Application
+    |
+    v
+PySwip Interface
+    |
+    v
+Prolog Knowledge Base
+    |
+    v
+Logical Route Search
+    |
+    v
+Shortest Valid Path
+    |
+    v
+Route + Distance Output
+
+Campus Locations
+
+The simulated network contains these locations:
+
+Main Gate
+
+Administration Block
+
+Academic Block
+
+Central Library
+
+Research Block
+
+Auditorium
+
+Cafeteria
+
+Computer Science Block
+
+Medical Center
+
+Sports Complex
+
+Student Activity Center
+
+Hostel Block
+
+Residential Area
+
+Parking Lot
+
+Central Plaza
+
+Main Components
+
+route_optimizer.py
 
 The Python execution layer. It:
 
-- accepts the start and destination;
-- accepts optional blocked/restricted locations;
-- starts the Prolog engine;
-- loads the knowledge base;
-- sends the route query;
-- displays the resulting path and distance.
+accepts the start and destination;
 
-### `knowledge_base.pl`
+accepts optional blocked/restricted locations;
 
-The Prolog knowledge base containing the map facts, route rules, and path-search logic.
+starts the Prolog engine;
 
-### `requirements.txt`
+loads the knowledge base;
 
-Contains the Python dependencies required by the application.
+sends the route query;
 
-### `project_report.md`
+displays the resulting path and distance.
 
-Contains the detailed project documentation, methodology, implementation details, testing, and conclusion.
+knowledge_base.pl
 
-## Installation
+Contains the simulated campus route facts, bidirectional route rules, dynamic constraints, and recursive path-search logic.
 
-### Clone This Repository
+requirements.txt
 
-```bash
+Contains the Python dependency required by the application.
+
+project_report.md
+
+Contains detailed project documentation, requirements, architecture, design, implementation, testing, challenges, and future enhancements.
+
+statement.md
+
+Contains the problem statement, project scope, target users, and high-level features.
+
+campus_map.png
+
+Illustrative project map showing the simulated campus locations used as the conceptual environment for the project.
+
+Installation
+
+1. Clone the Repository
+
 git clone https://github.com/AyanSharma01/Vityarthi-AI-ML-Project.git
 cd Vityarthi-AI-ML-Project
-```
 
-### Requirements
+2. Requirements
 
-- Python 3.8 or later
-- SWI-Prolog
-- PySwip
+Python 3.8 or later
 
-### Install Python dependencies
+SWI-Prolog
 
-```bash
+PySwip 0.3.3
+
+3. Install Python Dependencies
+
 pip install -r requirements.txt
-```
 
 Make sure SWI-Prolog is installed and available through the system PATH before running the Python program.
 
-## Running the Project
+Running the Project
 
-The application is command-line based.
+Basic Route Search
 
-### Basic route search
-
-```bash
 python route_optimizer.py --start "Main Gate" --end "Central Library"
-```
 
-### Route with blocked locations
+Route with a Blocked Location
 
-```bash
-python route_optimizer.py --start "Boys Hostel" --end "Central Library" --blocked "Cafeteria"
-```
+python route_optimizer.py --start "Main Gate" --end "Central Library" --blocked "Administration Block"
 
-### Route with restricted locations
+Route with a Restricted Location
 
-```bash
-python route_optimizer.py --start "Boys Hostel" --end "Central Library" --restricted "Main Gate"
-```
+python route_optimizer.py --start "Main Gate" --end "Central Library" --restricted "Administration Block"
 
-> The location names used in these examples must exist in the Prolog knowledge base.
+Multiple Blocked Locations
 
-## Example Output
+python route_optimizer.py --start "Main Gate" --end "Sports Complex" --blocked "Central Plaza" "Auditorium"
 
-```text
+Location names must match the names defined in knowledge_base.pl.
+
+Example Output
+
 ========================================================
               AI ROUTE OPTIMIZER
 ========================================================
@@ -136,29 +195,43 @@ python route_optimizer.py --start "Boys Hostel" --end "Central Library" --restri
 [>] Searching for a valid route...
 
 [+] OPTIMAL ROUTE FOUND
-    Path     : Main Gate -> Central Library
-    Distance : 150 units
+    Path     : Main Gate -> Administration Block -> Academic Block -> Central Library
+    Distance : 390 units
 ========================================================
-```
 
-## Project Structure
+Testing
 
-```text
+The project can be tested using normal route searches and dynamic constraints.
+
+Example:
+
+python route_optimizer.py --start "Main Gate" --end "Central Library"
+
+Blocked destination:
+
+python route_optimizer.py --start "Main Gate" --end "Central Library" --blocked "Central Library"
+
+Restricted destination:
+
+python route_optimizer.py --start "Main Gate" --end "Central Library" --restricted "Central Library"
+
+Project Structure
+
 Vityarthi-AI-ML-Project/
 │
 ├── route_optimizer.py
 ├── knowledge_base.pl
 ├── requirements.txt
 ├── README.md
+├── statement.md
 ├── project_report.md
 ├── campus_map.png
 └── .gitignore
-```
 
-## Developer
+Developer
 
-**Ayan Sharma**  
-Integrated M.Tech in Artificial Intelligence  
+Ayan Sharma
+Integrated M.Tech in Artificial Intelligence
 VIT Bhopal University
 
-**Registration Number:** 25MIM10136
+Registration Number: 25MIM10136
